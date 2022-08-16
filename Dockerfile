@@ -13,12 +13,14 @@ RUN apk add --no-cache --virtual .build-deps ${PHPIZE_DEPS} && \
     gettext-dev \
     libjpeg-turbo-dev \
     libpng-dev \
+    libpq-dev \
     libzip-dev \
     openldap-dev && \
     pecl install -o -f redis && \
     docker-php-ext-enable redis && \
     docker-php-ext-configure gd --with-freetype --with-jpeg --with-freetype && \
-    docker-php-ext-install calendar exif gettext gd ldap mysqli pdo_mysql shmop sockets && \
+    docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql && \
+    docker-php-ext-install calendar exif gettext gd ldap mysqli pgsql pdo pdo_mysql pdo_pgsql shmop sockets && \
     apk del .build-deps \
     && rm -rf /tmp/* \
     && rm -rf /usr/src/* \
