@@ -21,7 +21,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ggerasimov/k8s-php-fpm
+          images: ${{ github.repository }}
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
